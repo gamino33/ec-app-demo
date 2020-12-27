@@ -1,9 +1,14 @@
 const initialState = {
     users: {
-        icon: "",
         isSignedIn: false,
+        role: "",
         uid: "",
-        username: ""
+        username: "",
+        cart: [],
+        orders: [],
+    },
+    products: {
+        list: []
     }
 };
 
