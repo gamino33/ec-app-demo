@@ -43,6 +43,10 @@ const useStyles = makeStyles( (theme) => ({
     price: {
         color: theme.palette.secondary.main,
         fontSize: 16
+    },
+    menu: {
+        marginRight: 0,
+        marginLeft: "auto"
     }
 }))
 
@@ -80,9 +84,11 @@ const ProductCard = (props) => {
                         ¥{price}
                     </Typography>
                 </div>
-                <IconButton onClick={handleClick}>
-                    <MoreVertIcon />
-                </IconButton>
+                <div className={classes.menu} >
+                    <IconButton onClick={handleClick}>
+                        <MoreVertIcon />
+                    </IconButton>
+                </div>
                 <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
                     <MenuItem
                         onClick={ () => {

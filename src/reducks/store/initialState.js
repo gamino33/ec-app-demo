@@ -6,6 +6,7 @@ const initialState = {
         username: "",
         cart: [],
         orders: [],
+        favorite: [],
     },
     products: {
         list: []

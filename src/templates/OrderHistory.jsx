@@ -31,8 +31,6 @@ const OrderHistory = () => {
         // eslint-disable-next-line
     }, []);
 
-    console.log(orders);
-
     return (
         <section className="c-section-wrapin">
             <List className={classes.orderList} >

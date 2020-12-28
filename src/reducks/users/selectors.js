@@ -2,6 +2,11 @@ import {createSelector} from "reselect";
 
 const usersSelector = (state) => state.users;
 
+export const getFavoriteProducts = createSelector(
+    [usersSelector],
+    state => state.favorite
+);
+
 export const getProductsInCart = createSelector(
     [usersSelector],
     state => state.cart

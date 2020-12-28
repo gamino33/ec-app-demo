@@ -2,6 +2,17 @@ import {push} from "connected-react-router";
 import {auth, db, FirebaseTimestamp} from "../../firebase/index"
 import {signInAction, signOutAction, fetchProductsInCartAction, fetchOrdersHistoryAction} from "./actions"
 
+export const addProductToFavorite =  (addedProduct) => {
+    return async (dispatch, getState) => {
+        const uid = getState().users.id;
+        const favoriteRef = db.collection("users").doc(uid).collection("favorite").doc();
+        addedProduct["favoriteId"] = favoriteRef.id;
+        
+        await favoriteRef.set(addedProduct);
+        dispatch(push("/"));
+    }
+}
+
 export const addProductToCart = (addedProduct) => {
     return async (dispatch, getState) => {
         const uid = getState().users.uid;
@@ -95,7 +106,6 @@ export const signIn = (email, password) => {
                     db.collection("users").doc(uid).get()
                         .then(snapshot => {
                             const data = snapshot.data()
-
                             dispatch(signInAction({
                                 isSignedIn: true,
                                 role: data.role,
@@ -153,7 +163,7 @@ export const signOut = () => {
         auth.signOut()
             .then( () => {
                 dispatch(signOutAction())
-                dispatch(push("/signout"))
+                dispatch(push("/"))
             })
     }
 }
