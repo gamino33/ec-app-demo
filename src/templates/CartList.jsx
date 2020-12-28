@@ -39,7 +39,7 @@ const CartList = () => {
             <List className={classes.root}>
                 {productsInCart.length > 0 && (
                     productsInCart.map((product) =>
-                        <CartListItem key={product.cartId} product={product} />
+                        <CartListItem key={product.cartId} product={product} id={product.cartId} target={"cart"} />
                     )
                 )}
             </List>

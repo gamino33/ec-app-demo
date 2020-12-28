@@ -36,8 +36,8 @@ const CardListItem = (props) => {
     const price = props.product.price.toLocaleString();
     const size = props.product.size;
 
-    const removeProductFromCart = (id) => {
-        return db.collection("users").doc(uid).collection("cart").doc(id).delete();
+    const removeProductFrom = (target, id) => {
+        return db.collection("users").doc(uid).collection(target).doc(id).delete();
     }
 
     return (
@@ -50,7 +50,7 @@ const CardListItem = (props) => {
                     <ListItemText primary={name} secondary={"サイズ" + size} />
                     <ListItemText primary={"¥" + price} />
                 </div>
-                <IconButton onClick={() => removeProductFromCart(props.product.cartId)}>
+                <IconButton onClick={() => removeProductFrom(props.target ,props.id)}>
                     <DeleteIcon />
                 </IconButton>
             </ListItem>

@@ -71,7 +71,7 @@ const ClosableDrawer = (props) => {
                 })
                 setFiters(prevState => [...prevState, ...list]);
             })
-            // eslint-disable-next-line
+        // eslint-disable-next-line
     },[])
 
     const menus = [
@@ -79,6 +79,8 @@ const ClosableDrawer = (props) => {
         {func: selectMenu, label: "注文履歴", icon: <HistoryIcon />, id: "history", value: "/order/history"},
         {func: selectMenu, label: "プロフィール",icon: <PersonIcon />, id: "profile", value: "/user/mypage"},
     ];
+
+
 
     return (
         <nav className={classes.drawer}>
@@ -98,7 +100,7 @@ const ClosableDrawer = (props) => {
                     <div className={classes.searchField}>
                         <TextInput
                             fullWidth={false} label={"キーワードを入力"} multiline={false}
-                            onChange={inputKeyword} required={false} rows={1} value={keyword} type={"text"}
+                            onChange={inputKeyword} required={false} rows={1} value={keyword} type={"text"} 
                         />
                         <IconButton>
                             <SearchIcon />
