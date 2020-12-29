@@ -12,11 +12,11 @@ import AddCircleIcon from "@material-ui/icons/AddCircle"
 import HistoryIcon from "@material-ui/icons/History"
 import PersonIcon from "@material-ui/icons/Person"
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
-import {TextInput} from "../UIkit"
 import { useDispatch } from "react-redux"
 import {push} from "connected-react-router"
 import {signOut} from "../../reducks/users/operations"
 import { db } from "../../firebase"
+import { TextField } from "@material-ui/core"
 
 const useStyles = makeStyles( (theme) => ({
     drawer: {
@@ -45,7 +45,7 @@ const ClosableDrawer = (props) => {
 
 
     const inputKeyword = useCallback( (event) => {
-        setKeyword(event.target.value)
+        setKeyword(event.target.value);
     }, [setKeyword]);
 
     const selectMenu = (event, path) => {
@@ -81,7 +81,6 @@ const ClosableDrawer = (props) => {
     ];
 
 
-
     return (
         <nav className={classes.drawer}>
             <Drawer
@@ -98,11 +97,18 @@ const ClosableDrawer = (props) => {
                     onKeyDown={(event) => props.onClose(event)}
                 >
                     <div className={classes.searchField}>
-                        <TextInput
-                            fullWidth={false} label={"キーワードを入力"} multiline={false}
-                            onChange={inputKeyword} required={false} rows={1} value={keyword} type={"text"} 
+                        <TextField
+                            fullWidth={false}
+                            label={"キーワードを入力"}
+                            multiline={false}
+                            onChange={inputKeyword}
+                            required={false}
+                            rows={1}
+                            value={keyword}
+                            type={"text"}
+                            onKeyDown={(event) => event.which === 13 && selectMenu(event, "/?search=" + keyword)}
                         />
-                        <IconButton>
+                        <IconButton onClick={(event) => selectMenu(event, "/?search=" + keyword)}>
                             <SearchIcon />
                         </IconButton>
                     </div>

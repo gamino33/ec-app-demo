@@ -4,6 +4,7 @@ import {fetchProductsAction, deleteProductsAction} from "./actions"
 
 const productsRef = db.collection("products")
 
+
 export const deleteProduct = (id) => {
     return async(dispatch, getState) =>{
         productsRef.doc(id).delete()
@@ -91,20 +92,22 @@ export const orderProduct = (productsInCart, amount) => {
     }
 }
 
-
-export const fetchProducts = (gender, category) => {
+export const fetchProducts = (gender, category, search) => {
     return async (dispatch) => {
         let query = productsRef.orderBy("updated_at", "desc")
         query = (gender !== "") ? query.where("gender", "==", gender) : query;
         query = (category !== "") ? query.where("category", "==", category) : query;
 
+        console.log(1,search);
         query.get()
             .then(snapshots => {
-                const productList = []
+                let productList = []
                 snapshots.forEach(snapshot => {
                     const product = snapshot.data()
                     productList.push(product)
                 })
+                if(search !== "")
+                    productList = productList.filter(product => product.name.indexOf(search) !== -1);
                 dispatch(fetchProductsAction(productList))
             })
     }
