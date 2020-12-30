@@ -98,17 +98,16 @@ export const fetchProducts = (gender, category, search) => {
         query = (gender !== "") ? query.where("gender", "==", gender) : query;
         query = (category !== "") ? query.where("category", "==", category) : query;
 
-        console.log(1,search);
         query.get()
             .then(snapshots => {
-                let productList = []
+                let productList = [];
                 snapshots.forEach(snapshot => {
-                    const product = snapshot.data()
-                    productList.push(product)
+                    const product = snapshot.data();
+                    productList.push(product);
                 })
                 if(search !== "")
                     productList = productList.filter(product => product.name.indexOf(search) !== -1);
-                dispatch(fetchProductsAction(productList))
+                dispatch(fetchProductsAction(productList));
             })
     }
 }

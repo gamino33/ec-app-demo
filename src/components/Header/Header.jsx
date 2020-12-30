@@ -8,7 +8,15 @@ import {getIsSignedIn} from "../../reducks/users/selectors"
 import { push } from "connected-react-router"
 import {HeaderMenus, ClosableDrawer} from "./index"
 
-const useStyles = makeStyles({
+import IconButton from "@material-ui/core/IconButton"
+import TextField from "@material-ui/core/TextField"
+import SearchIcon from "@material-ui/icons/Search"
+import InputAdornment from "@material-ui/core/InputAdornment"
+import OutlinedInput from "@material-ui/core/OutlinedInput"
+import InputBase from "@material-ui/core/InputBase"
+import Paper from "@material-ui/core/Paper"
+
+const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
     },
@@ -26,8 +34,18 @@ const useStyles = makeStyles({
     },
     iconButtons: {
         margin: "0 0 0 auto"
+    },
+    searchField: {
+        [theme.breakpoints.up("sm")]:{
+            alignItems: "center",
+            display: "flex",
+            marginLeft: 32
+        },
+        [theme.breakpoints.down("xs")]:{
+            display: "none"
+        }
     }
-})
+}))
 
 const Header = () => {
     const classes = useStyles();
@@ -36,12 +54,17 @@ const Header = () => {
     const dispatch = useDispatch();
 
     const [open, setOpen] = useState(false);
+    const [keyword, setKeyword] = useState("");
 
     const handleDrawerToggle = useCallback( (event) => {
         if(event.type === "click" ){
             setOpen(!open);
         }
     }, [setOpen, open]);
+
+    const inputKeyword = useCallback( event => {
+        setKeyword(event.target.value)
+    },[])
 
 
     return (
@@ -52,6 +75,22 @@ const Header = () => {
                         src={logo} alt="Logo" width="140px"
                         onClick={ () => dispatch(push("/"))}
                     />
+                    <div className={classes.searchField} >
+                        <TextField
+                            placeholder="商品を検索"
+                            fullWidth={false}
+                            multiline={false}
+                            onChange={inputKeyword}
+                            required={false}
+                            rows={1}
+                            value={keyword}
+                            type={"text"}
+                            onKeyDown={(event) => event.which === 13 && dispatch(push("/?search="+keyword))}
+                        />
+                        <IconButton className={classes.iconButton} onClick={() => dispatch(push("/?search=" + keyword))}>
+                            <SearchIcon />
+                        </IconButton>
+                    </div>
                     {isSignedIn && (
                         <div className={classes.iconButtons}>
                             <HeaderMenus
