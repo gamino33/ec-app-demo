@@ -7,14 +7,10 @@ import {useDispatch, useSelector} from "react-redux"
 import {getIsSignedIn} from "../../reducks/users/selectors"
 import { push } from "connected-react-router"
 import {HeaderMenus, ClosableDrawer} from "./index"
-
 import IconButton from "@material-ui/core/IconButton"
 import TextField from "@material-ui/core/TextField"
 import SearchIcon from "@material-ui/icons/Search"
-import InputAdornment from "@material-ui/core/InputAdornment"
-import OutlinedInput from "@material-ui/core/OutlinedInput"
-import InputBase from "@material-ui/core/InputBase"
-import Paper from "@material-ui/core/Paper"
+
 
 const useStyles = makeStyles(theme => ({
     root: {
