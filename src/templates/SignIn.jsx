@@ -48,6 +48,7 @@ const SignIn = () => {
             <div className="module-spacer--medium" />
             <div className="center">
                 <PrimaryButton label={"Sign In"} onClick={() => dispatch(signIn(email, password))} />
+                <PrimaryButton label={"テストアカウントはこちら"} onClick={() => dispatch(signIn("test@test.com", "test1234"))} />
                 <div className="module-spacer--medium" />
                 <p onClick={() => dispatch(push("/signup"))}>アカウントをお持ちでない方はこちら</p>
                 <div className="module-spacer--medium" />

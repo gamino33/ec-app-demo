@@ -4,6 +4,7 @@
 
 /firestore*
 /firebase*
+src/firebase/config.js
 
 # dependencies
 /node_modules

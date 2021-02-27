@@ -8,9 +8,7 @@ const App = () => {
     return(
         <>
             <Header />
-            <main className="c-main">
-                <Router />
-            </main>
+            <Router />
         </>
     )
 };
